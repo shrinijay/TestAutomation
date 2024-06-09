@@ -1,24 +1,24 @@
-package sprint1.day1;
+package sprint1.day2;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.sound.midi.Soundbank;
 import java.time.Duration;
 
-public class EditDashboard {
+public class DeleteDashboard {
 
     public static void main(String[] args) throws InterruptedException {
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--disable-notifications");
 
-        ChromeDriver driver = new ChromeDriver(options); //ChromeDriver,RemoteWebDriver,FireFox - no need to do typecasting // WebDriver - typecasting typecasting -  parent class is trying to access child class
+            ChromeDriver driver = new ChromeDriver(options); //ChromeDriver,RemoteWebDriver,FireFox - no need to do typecasting // WebDriver - typecasting typecasting -  parent class is trying to access child class
         try {
             driver.get("https://login.salesforce.com/");
             driver.manage().window().maximize();
@@ -37,31 +37,32 @@ public class EditDashboard {
             WebElement dashboard = driver.findElement(By.xpath("//a[@data-label='Dashboards']"));
 
             driver.executeScript("arguments[0].scrollIntoView();", dashboard);
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].click();", dashboard);
-            //  5. Search the Dashboard 'Salesforce Automation by Your Name'
+            driver.executeScript("arguments[0].click();", dashboard);
             driver.findElement(By.xpath("//input[@placeholder='Search recent dashboards...']")).sendKeys("Salesforce Automation by");
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-            //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//tr[@class='slds-hint-parent']")));
+            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//tr[@class='slds-hint-parent']")));
             driver.findElement(By.xpath("//table/tbody/tr[1]/td[6]//button")).click();
-            Thread.sleep(3000);
-            driver.findElement(By.xpath("//span[text()='Edit']")).click();
-            // driver.findElement(By.xpath("//span[text()='Edit Dashboard name']/parent::button")).click();
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("(//div[@class='loadingSpinner'])[3]")));
-            // wait.until(ExpectedConditions.presenceOfElementLocated(By.id("edit-dashboard-title")));
-            Thread.sleep(3000);
-            driver.switchTo().frame(driver.findElement(By.xpath("(//iframe[@title='dashboard'])[3]")));
-            driver.findElement(By.id("edit-dashboard-title")).sendKeys("Salesforce Automation by Shrinidhi Edit");
-            driver.findElement(By.id("edit-dashboard-title")).sendKeys(Keys.ENTER);
-            String text = driver.findElement(By.xpath("//div[@class='slds-form-element editTitle']//span")).getText();
-            System.out.println("text is " + text);
-            driver.switchTo().defaultContent();
+
+            driver.findElement(By.xpath("//span[text()='Delete']")).click();
+
+            driver.findElement(By.xpath("//button[@title='Delete']")).click();
+            String message = driver.findElement(By.xpath("//span[contains(@class,'toastMessage')]")).getText();
+            System.out.println(message);
+            if(message.equals("Dashboard was deleted"))
+            {
+                System.out.println("Dashboard deleted");
+            }
+            else{
+                System.out.println("Not deleted");
+            }
         }
-        catch (Exception e){
-            System.out.println(e.fillInStackTrace());
+        catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        finally {
             driver.quit();
         }
-
 
     }
 }
