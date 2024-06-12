@@ -51,8 +51,10 @@ public class DashboardSubscription {
             System.out.println("i am here bfr clickable");
             wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//label[@for='daily']/input"))));
             System.out.println("i am here after clickable");
-            driver.findElement(By.xpath("//label[@for='daily']/input")).click();
+           WebElement daily = driver.findElement(By.xpath("//label[@for='daily']/input"));
+           driver.executeScript("arguments[0].click();",daily);
             driver.findElement(By.xpath("//span[text()='Save']")).click();
+            Thread.sleep(3000);
             String message = driver.findElement(By.xpath("//span[contains(@class,'toastMessage')]")).getText();
             Thread.sleep(5000);
             System.out.println(message);
