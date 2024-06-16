@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class CreateServiceTerritory {
+public class CreateServiceTerritory_CSS {
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -41,20 +41,20 @@ public class CreateServiceTerritory {
             // 8) Enter Your Name in Name field
             WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
             By nameField = By.cssSelector("input[name='Name']");//using css selector not working have to ask
-            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@name='Name']"))));
-            //Thread.sleep(5000);
-            driver.findElement(By.xpath("//input[@name='Name']")).sendKeys("Shrinidhi1");
+            //wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("input[name='Name']"))));
+            Thread.sleep(5000);
+            driver.findElement(By.cssSelector("div[id^='sectionContent'] >dl > slot > records-record-layout-row:first-child > slot > records-record-layout-item > div > span > slot > records-record-layout-base-input > lightning-input > lightning-primitive-input-simple > div[part='input-text'] > div[part='input-container'] > input[name='Name']")).sendKeys("Shrinidhi1");
             // 9) Click on Operating Hours and Choose the First option
-            driver.findElement(By.xpath("//input[contains(@placeholder,'Operating Hours')]")).click();
-            //driver.findElement(By.cssSelector("ul[aria-label='Recent Operating Hours'] li:nth-of-type(2)")).click();
-            driver.findElement(By.xpath("//ul[@aria-label='Recent Operating Hours']/li[2]")).click();
+            driver.findElement(By.cssSelector("input[placeholder*='Operating Hours']")).click();
+            driver.findElement(By.cssSelector("ul[aria-label='Recent Operating Hours'] li:nth-of-type(2)")).click();
+
             // 10) Check Active Field
-            WebElement activechkbox = driver.findElement(By.xpath("//input[@name='IsActive']"));
+            WebElement activechkbox = driver.findElement(By.cssSelector("input[name='IsActive']"));
             activechkbox.click();
             System.out.println(activechkbox.isSelected());
 
             // 11) Enter the City your residing in City Field
-            driver.findElement(By.xpath("//input[@name='city']")).sendKeys("Chennai");
+            driver.findElement(By.cssSelector("input[name='city']")).sendKeys("Chennai");
 
             // 12) Enter the State your residing in State Field
             driver.findElement(By.xpath("//input[@name='province']")).sendKeys("TN");

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class CreateServiceTerritory {
+public class EditServiceTerritory {
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -35,8 +35,8 @@ public class CreateServiceTerritory {
             WebElement serviceTerritory = driver.findElement(By.xpath("//p[text()='Service Territories']"));
             driver.executeScript("arguments[0].scrollIntoView();", serviceTerritory);
             driver.executeScript("arguments[0].click();", serviceTerritory);
-            //7) Click on New
-            driver.findElement(By.cssSelector("div[title='New']")).click();
+            //7) Click on Down Arrow DropDown
+            driver.findElement(By.xpath("//tbody/tr[1]/td[8]//a")).click();
             //Thread.sleep(5000);
             // 8) Enter Your Name in Name field
             WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
