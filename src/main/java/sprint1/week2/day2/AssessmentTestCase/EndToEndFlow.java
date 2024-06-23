@@ -1,4 +1,4 @@
-package sprint2.day2.AssessmentTestCase;
+package sprint1.week2.day2.AssessmentTestCase;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

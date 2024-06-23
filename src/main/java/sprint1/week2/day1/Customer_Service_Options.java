@@ -1,4 +1,4 @@
-package sprint2.day1;
+package sprint1.week2.day1;
 
 import io.github.sukgu.Shadow;
 import org.openqa.selenium.By;

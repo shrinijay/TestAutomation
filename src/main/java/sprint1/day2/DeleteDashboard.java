@@ -40,7 +40,7 @@ public class DeleteDashboard {
             driver.executeScript("arguments[0].click();", dashboard);
             driver.findElement(By.xpath("//input[@placeholder='Search recent dashboards...']")).sendKeys("Salesforce Automation by");
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//tr[@class='slds-hint-parent']")));
+            wait.until(ExpectedConditions.stalenessOf(driver.findElement(By.xpath("//tr[@class='slds-hint-parent']"))));
             driver.findElement(By.xpath("//table/tbody/tr[1]/td[6]//button")).click();
 
             driver.findElement(By.xpath("//span[text()='Delete']")).click();

@@ -43,6 +43,7 @@ public class EditDashboard {
             driver.findElement(By.xpath("//input[@placeholder='Search recent dashboards...']")).sendKeys("Salesforce Automation by");
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//tr[@class='slds-hint-parent']")));
+            Thread.sleep(3000);
             driver.findElement(By.xpath("//table/tbody/tr[1]/td[6]//button")).click();
             Thread.sleep(3000);
             driver.findElement(By.xpath("//span[text()='Edit']")).click();

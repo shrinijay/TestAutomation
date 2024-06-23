@@ -1,4 +1,4 @@
-package sprint2.day1.ServiceTerritory;
+package sprint1.week2.day1.ServiceTerritory;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
