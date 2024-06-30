@@ -12,10 +12,10 @@
            </class>
      </classes>
     </test>
-    <!--test name="ServiceFunctionality">
+    <test name="ServiceFunctionality">
         <classes>
         <class name ="sprint2.week1.TestCases.ServiceTerritoryFunctionality"/>
         </classes>
-    </test-->
+    </test>
 
 </suite>

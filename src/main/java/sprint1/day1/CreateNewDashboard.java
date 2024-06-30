@@ -22,8 +22,8 @@ public class CreateNewDashboard {
         driver.get("https://login.salesforce.com/");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        driver.findElement(By.id("username")).sendKeys("shrinidhivijay@testleaf.com");
-        driver.findElement(By.id("password")).sendKeys("Sunlight2");
+        driver.findElement(By.id("username")).sendKeys("bootcamp_2024@testleaf.com");
+        driver.findElement(By.id("password")).sendKeys("Bootcamp@123");
         driver.findElement(By.id("Login")).click();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.getTitle();

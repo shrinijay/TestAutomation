@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Salesforce Functionality Automation">
+
+    <test name="Assessment">
+        <classes>
+            <class name="sprint3.assessment.TestCases.Assessment">
+
+
+           </class>
+     </classes>
+    </test>
+
+</suite>

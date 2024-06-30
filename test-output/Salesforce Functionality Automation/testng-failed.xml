@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Salesforce Functionality Automation]">
-  <listeners>
-    <listener class-name="sprint2.week1.listener.ListenerT"/>
-  </listeners>
-  <test thread-count="5" name="DashBoardFunctionality(failed)" parallel="classes">
+  <test thread-count="5" name="Assessment(failed)">
     <classes>
-      <class name="sprint2.week1.TestCases.DashboardFunctionality">
+      <class name="sprint3.assessment.TestCases.Assessment">
         <methods>
-          <include name="editDashboard"/>
-          <include name="login"/>
-          <include name="dashboardSubscription"/>
-          <include name="createDashBoard"/>
+          <include name="enterFlow"/>
           <include name="preRequisites"/>
-          <include name="signOut"/>
-          <include name="setValues"/>
-          <include name="selectDashBoardFromMenu"/>
-          <include name="deleteDashboard"/>
-          <include name="sortDashboardName"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- sprint2.week1.TestCases.DashboardFunctionality -->
+      </class> <!-- sprint3.assessment.TestCases.Assessment -->
     </classes>
-  </test> <!-- DashBoardFunctionality(failed) -->
+  </test> <!-- Assessment(failed) -->
 </suite> <!-- Failed suite [Salesforce Functionality Automation] -->

@@ -1,0 +1,3 @@
+https://allurereport.org/docs/testng/
+
+Allure.addAttachment("Failed Screenshot", Files.newInputStream(Paths.get("./images/failed.png")));

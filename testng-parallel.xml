@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Salesforce Functionality Automation">
+<listeners>
+    <listener class-name="sprint2.week1.listener.ListenerT"></listener>
+</listeners>
+    <test name="DashBoardFunctionality">
+        <classes>
+            <class name="sprint2.week1.TestCases.DashboardFunctionality">
+
+
+           </class>
+     </classes>
+    </test>
+    <!--test name="ServiceFunctionality">
+        <classes>
+        <class name ="sprint2.week1.TestCases.ServiceTerritoryFunctionality"/>
+        </classes>
+    </test-->
+
+</suite>

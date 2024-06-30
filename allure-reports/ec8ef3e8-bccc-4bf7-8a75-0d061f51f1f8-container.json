@@ -1,0 +1,1 @@
+{"uuid":"ec8ef3e8-bccc-4bf7-8a75-0d061f51f1f8","name":"Salesforce Functionality Automation","children":["7ac3feb8-5d1b-49af-92b0-d47e80206579"],"befores":[{"name":"preRequisites","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1719750018952,"stop":1719750027684}],"afters":[],"start":1719750018910,"stop":1719750038662}
