@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Salesforce Functionality Automation">
-    <test name = "DashBoardFunctionality">
+<listeners>
+    <listener class-name="sprint2.week1.listener.ListenerT"></listener>
+</listeners>
+    <test name="DashBoardFunctionality">
         <classes>
-            <class name="sprint2.week1.DashboardFunctionality" />
-            <class name ="sprint2.week1.ServiceTerritoryFunctionality"/>
+            <class name="sprint2.week1.TestCases.DashboardFunctionality">
 
-        </classes>
+
+           </class>
+     </classes>
     </test>
+    <!--test name="ServiceFunctionality">
+        <classes>
+        <class name ="sprint2.week1.TestCases.ServiceTerritoryFunctionality"/>
+        </classes>
+    </test-->
 
 </suite>

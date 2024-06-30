@@ -1,4 +1,4 @@
-package sprint2.week1;
+package sprint2.week1.TestCases;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -7,18 +7,28 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+import sprint2.week1.base.BaseClass;
 
-import java.sql.SQLOutput;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class DashboardFunctionality extends BaseClass {
+
+    @BeforeTest
+    public void setValues(){
+        fileName = "DashboardInput";
+    }
+
+    @AfterMethod
+    public void signOut(){
+        driver.findElement(By.xpath("//button[contains(@class,'branding-userProfile-button')]")).click();
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[contains(@class,'logout')]"))));
+        driver.findElement(By.xpath("//a[contains(@class,'logout')]")).click();
+    }
 
     @BeforeMethod
     public void selectDashBoardFromMenu(){
@@ -34,15 +44,19 @@ public class DashboardFunctionality extends BaseClass {
             js.executeScript("arguments[0].click();",dashboard);
         }
 
-
-    @Test
-    public void createDashBoard() throws InterruptedException {
+    /* @Test
+    public void dummy(){
+            System.out.println("came here");
+            Assert.fail("failing it explictly to check retry analyzer");
+        }*/
+   // @Test(dataProvider = "dataFromExcel") //, retryAnalyzer = sprint2.week1.retry.RetryFailedCases.class
+    public void createDashBoardForMultipleData(String data) throws InterruptedException {
         //4. Click on the New Dashboard option
         driver.findElement(By.xpath("//a[@title = 'New Dashboard']")).click();
         //5. Enter Name as 'Salesforce Automation by Your Name'  and Click on Create
         Thread.sleep(3000);
         driver.switchTo().frame(0);
-        driver.findElement(By.id("dashboardNameInput")).sendKeys("Salesforce Automation by Shrinidhi 12");
+        driver.findElement(By.id("dashboardNameInput")).sendKeys(data);
         driver.findElement(By.id("submitBtn")).click();
         driver.switchTo().defaultContent();
         //6.Click on Save and Verify Dashboard name
@@ -52,27 +66,39 @@ public class DashboardFunctionality extends BaseClass {
         driver.switchTo().defaultContent();
         String message = driver.findElement(By.xpath("//span[contains(@class,'toastMessage')]")).getText();
         System.out.println(message);
-        if(message.equals("Dashboard saved"))
-        {
-
-            Assert.assertTrue(message.equals("Dashboard saved"),"Dashboard saved successfully");
-        }
-        else{
-            System.out.println("Not created");
-            throw new RuntimeException();
-
-        }
+        Assert.assertTrue(message.equals("Dashboard saved"),"Dashboard saved successfully");
 
     }
 
-    @Test
-    public void editDashboard() throws InterruptedException {
+    @Test(dataProvider = "dataToBeEntered") //, retryAnalyzer = sprint2.week1.retry.RetryFailedCases.class
+    public void createDashBoard(String data) throws InterruptedException {
+        //4. Click on the New Dashboard option
+        driver.findElement(By.xpath("//a[@title = 'New Dashboard']")).click();
+        //5. Enter Name as 'Salesforce Automation by Your Name'  and Click on Create
+        Thread.sleep(3000);
+        driver.switchTo().frame(0);
+        driver.findElement(By.id("dashboardNameInput")).sendKeys(data);
+        driver.findElement(By.id("submitBtn")).click();
+        driver.switchTo().defaultContent();
+        //6.Click on Save and Verify Dashboard name
+        Thread.sleep(3000);
+        driver.switchTo().frame(0);
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+        driver.switchTo().defaultContent();
+        String message = driver.findElement(By.xpath("//span[contains(@class,'toastMessage')]")).getText();
+        System.out.println(message);
+        Assert.assertTrue(message.equals("Dashboard saved"),"Dashboard saved successfully");
+
+    }
+
+    @Test(dataProvider = "dataToBeEntered")//,retryAnalyzer = sprint2.week1.retry.RetryFailedCases.class
+    public void editDashboard(String data) throws InterruptedException {
 
             //  5. Search the Dashboard 'Salesforce Automation by Your Name'
             driver.findElement(By.xpath("//input[@placeholder='Search recent dashboards...']")).sendKeys("Salesforce Automation by");
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-            Thread.sleep(3000);
-            //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//tr[@class='slds-hint-parent']")));
+           // Thread.sleep(3000);
+            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//tbody/tr[1]")));
             driver.findElement(By.xpath("//table/tbody/tr[1]/td[6]//button")).click();
             Thread.sleep(3000);
             driver.findElement(By.xpath("//span[text()='Edit']")).click();
@@ -83,7 +109,7 @@ public class DashboardFunctionality extends BaseClass {
             driver.switchTo().frame(driver.findElement(By.xpath("(//iframe[@title='dashboard'])[2]")));
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Edit Dashboard name']/parent::button")));
             driver.findElement(By.xpath("//span[text()='Edit Dashboard name']/parent::button")).click();
-            driver.findElement(By.id("edit-dashboard-title")).sendKeys("Salesforce Automation by Shrinidhi12 Edit");
+            driver.findElement(By.id("edit-dashboard-title")).sendKeys(data+"Edit");
             driver.findElement(By.id("edit-dashboard-title")).sendKeys(Keys.ENTER);
             String text = driver.findElement(By.xpath("//div[@class='slds-form-element editTitle']//span")).getText();
             System.out.println("text is " + text);
@@ -100,7 +126,7 @@ public class DashboardFunctionality extends BaseClass {
 
     }
 
-    @Test
+  @Test() //retryAnalyzer = sprint2.week1.retry.RetryFailedCases.class
     public void dashboardSubscription() throws InterruptedException {
 
         driver.findElement(By.xpath("//input[@placeholder='Search recent dashboards...']")).sendKeys("Salesforce Automation by");
@@ -136,7 +162,7 @@ public class DashboardFunctionality extends BaseClass {
 
     }
 
-    @Test
+   @Test(dependsOnMethods = {"editDashboard"}) //retryAnalyzer = sprint2.week1.retry.RetryFailedCases.class,
     public void deleteDashboard() {
         driver.findElement(By.xpath("//input[@placeholder='Search recent dashboards...']")).sendKeys("Salesforce Automation by");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
@@ -154,7 +180,7 @@ public class DashboardFunctionality extends BaseClass {
 
     }
 
-    @Test
+    @Test() //retryAnalyzer = sprint2.week1.retry.RetryFailedCases.class
     public void sortDashboardName() throws InterruptedException {
         List<String> strList = new ArrayList<>(); List<String> strListAfterSort = new ArrayList<>();
         List<WebElement> dNamesBfrSorting = driver.findElements(By.xpath("//th[@data-label='Dashboard Name']//a"));

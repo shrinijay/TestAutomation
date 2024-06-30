@@ -1,4 +1,4 @@
-package sprint2.week1;
+package sprint2.week1.TestCases;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import sprint2.week1.base.BaseClass;
 
 import java.time.Duration;
 
@@ -16,13 +17,14 @@ public class ServiceTerritoryFunctionality extends BaseClass {
     public void clickOnServiceTerritoryMenu(){
         //2.Click on the toggle menu button from the left corner
         //div[@class='slds-icon-waffle']
+        System.out.println("driver is "+driver);
         driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
         //3.Click View All
         driver.findElement(By.xpath("//button[@aria-label='View All Applications']")).click();
         //Click on Service Territories
-        WebElement serviceTerritory = driver.findElement(By.xpath("//p[text()='Service Territories']"));
-        driver.executeScript("arguments[0].scrollIntoView();", serviceTerritory);
-        driver.executeScript("arguments[0].click();", serviceTerritory);
+       // WebElement serviceTerritory = driver.findElement(By.xpath("//p[text()='Service Territories']"));
+        driver.executeScript("arguments[0].scrollIntoView();", driver.findElement(By.xpath("//p[text()='Service Territories']")));
+        driver.executeScript("arguments[0].click();", driver.findElement(By.xpath("//p[text()='Service Territories']")));
     }
 
     @Test
@@ -30,7 +32,7 @@ public class ServiceTerritoryFunctionality extends BaseClass {
         driver.findElement(By.cssSelector("div[title='New']")).click();
         //Thread.sleep(5000);
         // 8) Enter Your Name in Name field
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         By nameField = By.cssSelector("input[name='Name']");//using css selector not working have to ask
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@name='Name']"))));
         //Thread.sleep(5000);
@@ -38,6 +40,7 @@ public class ServiceTerritoryFunctionality extends BaseClass {
         // 9) Click on Operating Hours and Choose the First option
         driver.findElement(By.xpath("//input[contains(@placeholder,'Operating Hours')]")).click();
         //driver.findElement(By.cssSelector("ul[aria-label='Recent Operating Hours'] li:nth-of-type(2)")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//ul[@aria-label='Recent Operating Hours']/li[2]"))));
         driver.findElement(By.xpath("//ul[@aria-label='Recent Operating Hours']/li[2]")).click();
         // 10) Check Active Field
         WebElement activechkbox = driver.findElement(By.xpath("//input[@name='IsActive']"));
