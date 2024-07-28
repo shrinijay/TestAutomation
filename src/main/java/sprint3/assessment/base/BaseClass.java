@@ -14,6 +14,7 @@ import org.testng.annotations.DataProvider;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.HashMap;
 
 import static sprint2.week1.util.ReadFromExcel.readDataFromExcel;
 
@@ -24,8 +25,12 @@ public class BaseClass {
 
     @BeforeSuite()
    public void preRequisites(){
+        HashMap<String,Object> map = new HashMap<String,Object>();
+        map.put("profile.default_content_settings.popups",0);
+        map.put("download.default_directory",System.getProperty("user.dir"));
        ChromeOptions options = new ChromeOptions();
        options.addArguments("--disable-notifications");
+       options.setExperimentalOption("prefs",map);
        driver = new ChromeDriver(options);
        driver.get("https://login.salesforce.com/");
        driver.manage().window().maximize();

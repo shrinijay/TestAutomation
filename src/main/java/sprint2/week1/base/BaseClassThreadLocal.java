@@ -6,10 +6,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +15,7 @@ import java.time.Duration;
 import static sprint2.week1.util.ReadFromExcel.readDataFromExcel;
 
 public class BaseClassThreadLocal {
-    private static ThreadLocal<RemoteWebDriver> tlDriver;
+    private static ThreadLocal<RemoteWebDriver> tlDriver = new ThreadLocal<>();
     public RemoteWebDriver getDriver() {
         return tlDriver.get();
     }
@@ -29,11 +26,11 @@ public class BaseClassThreadLocal {
 
     public String fileName;
 
-    @BeforeSuite()
+    @BeforeClass()
    public void preRequisites(){
        ChromeOptions options = new ChromeOptions();
        options.addArguments("--disable-notifications");
-      setDriver(new ChromeDriver(options));
+        tlDriver.set(new ChromeDriver(options));
        getDriver().get("https://login.salesforce.com/");
        getDriver().manage().window().maximize();
        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
@@ -41,18 +38,20 @@ public class BaseClassThreadLocal {
        /*     driver.findElement(By.id("username")).sendKeys("shrinidhivijay@testleaf.com");
         driver.findElement(By.id("password")).sendKeys("Sunlight2");
         driver.findElement(By.id("Login")).click();*/
+        System.out.println("driver from before suite - "+getDriver());
+        getDriver().findElement(By.id("username")).sendKeys("shrinidhivijay@testleaf.com");
+        getDriver().findElement(By.id("password")).sendKeys("Sunlight2");
+        getDriver().findElement(By.id("Login")).click();
  }
 
-   @BeforeMethod
+   /*@BeforeClass(alwaysRun = true)
     public void login(){
+       System.out.println("driver from bc----->  " +getDriver());
 
-       getDriver().findElement(By.id("username")).sendKeys("shrinidhivijay@testleaf.com");
-       getDriver().findElement(By.id("password")).sendKeys("Sunlight2");
-       getDriver().findElement(By.id("Login")).click();
-   }
+   }*/
 
 
-   @AfterSuite(alwaysRun = true)
+   @AfterClass(alwaysRun = true)
     public void tearDown(){
        getDriver().quit();
    }

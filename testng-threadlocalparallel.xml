@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Salesforce Functionality Automation" parallel="classes">
+
+    <test name="DashBoardFunctionality">
+        <classes>
+            <class name="sprint2.week1.TestCases.DashboardFunctionalityThreadLocal">
+
+
+           </class>
+     </classes>
+    </test>
+    <test name="ServiceFunctionality">
+        <classes>
+        <class name ="sprint2.week1.TestCases.ServiceTerritoryFunctionalityThreadLocal"/>
+        </classes>
+    </test>
+
+</suite>
